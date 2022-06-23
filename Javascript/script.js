@@ -39,9 +39,7 @@ function displyError(badText) {
   let displyErr = document.getElementById("err");
   displyErr.innerHTML = badText;
   displyErr.classList.remove("d-none");
-
-  let clear = document.getElementById("sequence");
-  clear.innerHTML = "";
+  clearSequance();
   clearValidation();
 }
 
@@ -60,6 +58,7 @@ function oncalc() {
   }
 
   clearValidation();
+  clearErr();
 
   fibonacci_remote(parseInt(elmIndex.value));
 }
@@ -70,7 +69,8 @@ function displayValidation(badText) {
 
   let displayIndex = document.getElementById("index");
   displayIndex.classList.add("is-invalid");
-  clearErrors();
+  clearErr();
+  clearSequance();
 }
 
 function clearValidation() {
@@ -79,4 +79,10 @@ function clearValidation() {
 
   let displayIndex = document.getElementById("index");
   displayIndex.classList.remove("is-invalid");
+}
+
+function clearSequance() {
+  let clear = document.getElementById("sequence");
+  clear.innerHTML = "";
+
 }
