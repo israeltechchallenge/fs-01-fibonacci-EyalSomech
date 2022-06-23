@@ -42,6 +42,7 @@ function displyError(badText) {
 
   let clear = document.getElementById("sequence");
   clear.innerHTML = "";
+  clearValidation();
 }
 
 function clearErr() {
@@ -69,6 +70,7 @@ function displayValidation(badText) {
 
   let displayIndex = document.getElementById("index");
   displayIndex.classList.add("is-invalid");
+  clearErrors();
 }
 
 function clearValidation() {
