@@ -6,46 +6,31 @@ window.onload = () => {
   
     
 }
-// Loop Function //
-// function fibonacci(index) {
-//     if (index < 2) return index;
 
-//     let sequence = 1;
-//     let prev = 0;
-//     for (let i = 2; i <= index; i++) {
+function fibonacci_remote(index) {
 
-//         let temp = prev;
-//         prev = sequence;
-//         sequence = sequence + temp;
+    fetch('http://localhost:5050/fibonacci/' + index)
+        .then(response => response.json())
 
-//     }
+
+        .then(data => document.getElementById('sequence').innerHTML = data['result']);
+
+        
     
 
-//     return sequence;
-
-// }
+}
 
 
 function oncalc () {
     
     let elmIndex = document.getElementById('index');
 
-    let r = fibonacciR(parseInt(elmIndex.value));  
+    // let r = 
+    fibonacci_remote(parseInt(elmIndex.value));  
 
-    let elmSequence =  document.getElementById('sequence');
+    // let elmSequence =  document.getElementById('sequence');
 
-    elmSequence.innerHTML = r;  
+    // // elmSequence.innerHTML = r;  
 
     
-}
-
-// recursive function
-
-function fibonacciR(index , prev = 0 , sequence = 1) {
-    if (index == 0) return prev;
-    if (index == 1) return sequence;
-    return fibonacciR(index - 1 , sequence , sequence + prev);
-
-
-
 }
