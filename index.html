@@ -6,16 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/styles.css" />
 </head>
 <body>
 
-    <h1 class="display-2 m-5" >Fibonacci Calculator</h1>
+    <h1 class="display-3 m-5" >Fibonacci Calculator</h1>
     <div class = "d-flex m-5 align-items-center">
         <span class="fs-4 m-2" >The Fibonacci Of </span> 
-        <input class="m-2" type="number" id="index" placeholder="#"></input> 
-        <button class="m-2 btn btn-primary"  id="is">Is</button>
+        <input class="m-2 col-1" type="number" id="index" placeholder="#"></input> 
+        <div class="invalid-tooltip" id="validation"></div>
+        <button class="m-2 btn btn-primary btn-sm"  id="is">Is</button>
         <b><u><span class="m-2" id="sequence"></span></u></b>
+        <div id="loader" class="ms-3 spinner-border d-none" role="status">
+            <span class="visually-hidden"></span>
+        </div>
+        <div id="err" class="d-none"></div>
     </div>
+
+        
 
  
 

@@ -1,36 +1,80 @@
 window.onload = () => {
-    
+  let elmButton = document.getElementById("is");
+  elmButton.addEventListener("click", oncalc);
+};
 
-    let elmButton =  document.getElementById('is');
-    elmButton.addEventListener('click' , oncalc);
-  
-    
+function spinnerOn() {
+  let sButton = document.getElementById("loader");
+  sButton.classList.remove("d-none");
+}
+
+function spinnerOff() {
+  let sButton = document.getElementById("loader");
+  sButton.classList.add("d-none");
 }
 
 function fibonacci_remote(index) {
-
-    fetch('http://localhost:5050/fibonacci/' + index)
-        .then(response => response.json())
-
-
-        .then(data => document.getElementById('sequence').innerHTML = data['result']);
-
-        
-    
-
+  spinnerOn();
+  fetch("http://localhost:5050/fibonacci/" + index)
+    .then((response) => {
+      if (response.ok) return response.json();
+      else {
+        return response.text().then((responseText) => {
+          throw new Error(responseText);
+        });
+      }
+    })
+    .then((data) => {
+      document.getElementById("sequence").innerHTML = data["result"];
+      spinnerOff();
+      clearErr();
+    })
+    .catch((error) => {
+      displyError(error);
+      spinnerOff();
+    });
 }
 
+function displyError(badText) {
+  let displyErr = document.getElementById("err");
+  displyErr.innerHTML = badText;
+  displyErr.classList.remove("d-none");
 
-function oncalc () {
-    
-    let elmIndex = document.getElementById('index');
+  let clear = document.getElementById("sequence");
+  clear.innerHTML = "";
+}
 
-    // let r = 
-    fibonacci_remote(parseInt(elmIndex.value));  
+function clearErr() {
+  let displyErr = document.getElementById("err");
+  displyErr.innerHTML = "";
+  displyErr.classList.add("d-none");
+}
 
-    // let elmSequence =  document.getElementById('sequence');
+function oncalc() {
+  let elmIndex = document.getElementById("index");
+  let index = elmIndex.value;
+  if (index > 50) {
+    displayValidation("Can't be larger than 50");
+    return;
+  }
 
-    // // elmSequence.innerHTML = r;  
+  clearValidation();
 
-    
+  fibonacci_remote(parseInt(elmIndex.value));
+}
+
+function displayValidation(badText) {
+  let displayVal = document.getElementById("validation");
+  displayVal.innerHTML = badText;
+
+  let displayIndex = document.getElementById("index");
+  displayIndex.classList.add("is-invalid");
+}
+
+function clearValidation() {
+  let displayVal = document.getElementById("validation");
+  displayVal.innerHTML = "";
+
+  let displayIndex = document.getElementById("index");
+  displayIndex.classList.remove("is-invalid");
 }
