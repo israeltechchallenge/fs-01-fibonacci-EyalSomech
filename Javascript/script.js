@@ -1,17 +1,12 @@
 window.onload = () => {
     
-    let index = 8;
-    let r = fibonacci(index);  
 
-    let elmSequence =  document.getElementById('sequence');
-    let elmIndex = document.getElementById('index');
-
-    elmSequence.innerHTML = r;  
-    elmIndex.innerHTML = index;
-
+    let elmButton =  document.getElementById('is');
+    elmButton.addEventListener('click' , oncalc);
+  
     
 }
-
+//Loop Function //
 function fibonacci(index) {
     if (index < 2) return index;
 
@@ -29,3 +24,18 @@ function fibonacci(index) {
     return sequence;
 
 }
+
+
+function oncalc () {
+    
+    let elmIndex = document.getElementById('index');
+
+    let r = fibonacci(parseInt(elmIndex.value));  
+
+    let elmSequence =  document.getElementById('sequence');
+
+    elmSequence.innerHTML = r;  
+
+    
+}
+
