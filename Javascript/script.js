@@ -171,7 +171,6 @@ function sortHistory(){
       history =  history.sort((a, b) => b.number - a.number);
           break; 
   }
-  debugger;
   
 
 
