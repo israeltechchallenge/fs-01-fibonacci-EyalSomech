@@ -29,9 +29,8 @@ function fibonacci_remote(index) {
       }
     })
     .then((data) => {
-      document.getElementById("sequence").innerHTML = data["result"];
+      displayResult(data["result"]);
       spinnerOff("loader");
-      clearErr();
       resultHistory();
     })
     .catch((error) => {
@@ -56,7 +55,7 @@ function clearErr() {
 
 function oncalc() {
   let elmIndex = document.getElementById("index");
-  let index = elmIndex.value;
+  let index = parseInt(elmIndex.value);
   if (index > 50) {
     displayValidation("Can't be larger than 50");
     return;
@@ -65,7 +64,15 @@ function oncalc() {
   clearValidation();
   clearErr();
 
-  fibonacci_remote(parseInt(elmIndex.value));
+  let elmCheck = document.getElementById("savebox");
+  if (elmCheck.checked) {
+    fibonacci_remote(index);
+  } 
+  else {
+   let sequence = fibonacciR(index);
+   if (sequence >= 0) displayResult(sequence);
+  }
+
 }
 
 function displayValidation(badText) {
@@ -108,7 +115,6 @@ function renderHistory() {
   for (let result of history){
     let elm = document.createElement("div");
     let date = new Date(result.createdDate);
-    debugger;
     elm.innerHTML =`<span><u> The Fibonacci of <strong>${result.number}</strong> Is <strong>${result.result}</strong>. Caculated at: ${date} </u> </span>`;  
     displayHistory.appendChild(elm);
   }
@@ -117,6 +123,27 @@ function renderHistory() {
 }
 
 
+function fibonacciR(index , prev = 0 , sequence = 1) {
+  if (index < 0) {
+    displyError("Cannot be negative number");
+    return -1;
+  }
+  if (index == 0) return prev;
+  if (index == 1) return sequence;
+  return fibonacciR(index - 1 , sequence , sequence + prev);
+}
+
+function displayResult(sequence){
+
+  document.getElementById("sequence").innerHTML = sequence;
+  
+  clearErr();
+
+
+
+
+
+}
 
 
 
