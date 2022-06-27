@@ -108,7 +108,6 @@ function renderHistory() {
   for (let result of history){
     let elm = document.createElement("div");
     let date = new Date(result.createdDate);
-    debugger;
     elm.innerHTML =`<span><u> The Fibonacci of <strong>${result.number}</strong> Is <strong>${result.result}</strong>. Caculated at: ${date} </u> </span>`;  
     displayHistory.appendChild(elm);
   }
