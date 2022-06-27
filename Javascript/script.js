@@ -1,9 +1,13 @@
 let history = [];
-
+let sort = 0;
 
 window.onload = () => {
   let elmButton = document.getElementById("is");
   elmButton.addEventListener("click", oncalc);
+  
+  let elmSort = document.getElementById("sort");
+  elmSort.addEventListener("change", onSort);
+
   resultHistory();
 };
 
@@ -111,7 +115,11 @@ function resultHistory() {
 }
 
 function renderHistory() {
+  
+  sortHistory();
+  
   let displayHistory = document.getElementById("display-history");
+  displayHistory.innerHTML = "";
   for (let result of history){
     let elm = document.createElement("div");
     let date = new Date(result.createdDate);
@@ -139,8 +147,32 @@ function displayResult(sequence){
   
   clearErr();
 
+}
 
+function onSort(event){
+  sort = parseInt(this.value);
+  renderHistory();
 
+}
+
+function sortHistory(){
+ 
+  switch (sort) {
+    case 1:  
+      history = history.sort((a, b) => a.createdDate - b.createdDate);
+      break; 
+    case 2:
+      history =  history.sort((a, b) => b.createdDate - a.createdDate);
+      break;
+    case 3:
+      history =  history.sort((a, b) => a.number - b.number);
+      break;
+    case 4:
+      history =  history.sort((a, b) => b.number - a.number);
+          break; 
+  }
+  debugger;
+  
 
 
 }
