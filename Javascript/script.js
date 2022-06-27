@@ -1,20 +1,24 @@
+let history = [];
+
+
 window.onload = () => {
   let elmButton = document.getElementById("is");
   elmButton.addEventListener("click", oncalc);
+  resultHistory();
 };
 
-function spinnerOn() {
-  let sButton = document.getElementById("loader");
+function spinnerOn(id) {
+  let sButton = document.getElementById(id);
   sButton.classList.remove("d-none");
 }
 
-function spinnerOff() {
-  let sButton = document.getElementById("loader");
+function spinnerOff(id) {
+  let sButton = document.getElementById(id);
   sButton.classList.add("d-none");
 }
 
 function fibonacci_remote(index) {
-  spinnerOn();
+  spinnerOn("loader");
   fetch("http://localhost:5050/fibonacci/" + index)
     .then((response) => {
       if (response.ok) return response.json();
@@ -26,12 +30,13 @@ function fibonacci_remote(index) {
     })
     .then((data) => {
       document.getElementById("sequence").innerHTML = data["result"];
-      spinnerOff();
+      spinnerOff("loader");
       clearErr();
+      resultHistory();
     })
     .catch((error) => {
       displyError(error);
-      spinnerOff();
+      spinnerOff("loader");
     });
 }
 
@@ -86,3 +91,35 @@ function clearSequance() {
   clear.innerHTML = "";
 
 }
+
+function resultHistory() {
+  spinnerOn("loader-result");
+  fetch("http://localhost:5050/getFibonacciResults")
+    .then(response =>  response.json()) 
+    .then(data => {
+    history = data.results;
+    renderHistory();
+   });
+
+}
+
+function renderHistory() {
+  let displayHistory = document.getElementById("display-history");
+  for (let result of history){
+    let elm = document.createElement("div");
+    let date = new Date(result.createdDate);
+    debugger;
+    elm.innerHTML =`<span><u> The Fibonacci of <strong>${result.number}</strong> Is <strong>${result.result}</strong>. Caculated at: ${date} </u> </span>`;  
+    displayHistory.appendChild(elm);
+  }
+
+  spinnerOff("loader-result");
+}
+
+
+
+
+
+
+
+
