@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1 class="display-3" >Fibonacci Calculator</h1>
+        </div>
+        <div class="row my-5">
+            <div class = "d-flex align-items-center">
+                <span class="fs-4" >The Fibonacci Of </span> 
+                <div class="position-relative col-md-2 mx-3">
+                    <input class="form-control" type="number" id="index" placeholder="#"></input> 
+                    <div class="invalid-tooltip" id="validation"></div>
+                </div>
+                <button class="m-2 btn btn-primary btn-sm"  id="is">Is</button>
+                <b><u><span class="m-2" id="sequence"></span></u></b>
+                <div id="loader" class="ms-3 spinner-border d-none" role="status">
+                    <span class="visually-hidden"></span>
+                </div>
+                <div id="err" class="d-none text-danger"></div>
+            </div>
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="savebox">
+                    <label class="form-check-label" for="flexCheckDefault">
+                     Save Calculation
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h2 class="col-12">Results</h2>
+            <div class="col-2 my-2">
+                <select id="sort" class="form-select form-select-sm" aria-label=".form-select-lg example">
+                    <option selected value="0" >Sort By</option>
+                    <option value="1">Date ACS</option>
+                    <option value="2">Date DECS</option>
+                     <option value="3">Number ACS</option>
+                     <option value="4">Number DECS</option>
+                </select>
+            </div> 
+            <span id="loader-result" class="spinner-border d-none"></span>
+            <div id="display-history"></div>
+        </div>
+    </div>
+    <script src="./Javascript/script.js"></script>
+    
+</body>
+</html>
